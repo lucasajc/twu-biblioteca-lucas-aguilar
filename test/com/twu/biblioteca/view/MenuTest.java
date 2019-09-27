@@ -33,4 +33,52 @@ public class MenuTest {
 
         assertThat(outContent.toString(), containsString(MenuOption.LIST_BOOKS.getDescription()));
     }
+
+    @Test
+    public void shouldSelectAMenuOptionWhenUserChoosesIt() {
+        menu.selectMenuOption("1");
+
+        assertThat(menu.getSelectedOption(), is(1));
+    }
+
+    @Test
+    public void shouldDetectValidUserInput() {
+        menu.selectMenuOption("1");
+
+        assertThat(menu.isSelectedOptionValid(), is(true));
+    }
+
+    @Test
+    public void shouldDetectInvalidUserInputType() {
+        menu.selectMenuOption("a");
+
+        assertThat(menu.isSelectedOptionValid(), is(false));
+    }
+
+    @Test
+    public void shouldDetectInvalidUserInputOption() {
+        menu.selectMenuOption("999");
+
+        assertThat(menu.isSelectedOptionValid(), is(false));
+    }
+
+    @Test
+    public void shouldPrintAMessageWhenDetectsInvalidUserInputType() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        menu.selectMenuOption("a");
+
+        assertThat(outContent.toString(), is(INVALID_MENU_OPTION_MESSAGE));
+    }
+
+    @Test
+    public void shouldPrintAMessageWhenDetectsInvalidUserInputOption() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        menu.selectMenuOption("999");
+
+        assertThat(outContent.toString(), is(INVALID_MENU_OPTION_MESSAGE));
+    }
 }
