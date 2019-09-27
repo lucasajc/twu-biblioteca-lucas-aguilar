@@ -1,7 +1,6 @@
 package com.twu.biblioteca.view;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Menu {
     private ArrayList<MenuOption> options;
@@ -24,5 +23,33 @@ public class Menu {
 
     public void printMenuSelectUserInput() {
         System.out.print("> Select a menu option: ");
+    }
+
+    public void selectMenuOption(String userInput) {
+        try {
+            selectedOption = Integer.parseInt(userInput);
+            for (MenuOption menuOption : MenuOption.values()) {
+                if(menuOption.getMenuKey() == selectedOption) {
+                    isSelectedOptionValid = true;
+                    return;
+                }
+            }
+            rejectInvalidOption();
+        } catch(NumberFormatException e) {
+            rejectInvalidOption();
+        }
+    }
+
+    public void rejectInvalidOption() {
+        System.out.println("\nPlease select a valid option!\n");
+        isSelectedOptionValid = false;
+    }
+
+    public int getSelectedOption() {
+        return selectedOption;
+    }
+
+    public boolean isSelectedOptionValid() {
+        return isSelectedOptionValid;
     }
 }
