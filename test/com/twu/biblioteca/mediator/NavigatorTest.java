@@ -24,6 +24,8 @@ public class NavigatorTest {
     private ArrayList<Book> bookList = new ArrayList<Book>();
     private Navigator navigator;
 
+    private static final String INVALID_CHECKOUT_MESSAGE = "Please select a valid ID!";
+
     private void initializeMenu() {
         MenuOption listOfBooksOption = MenuOption.LIST_BOOKS;
         ArrayList<MenuOption> options = new ArrayList<MenuOption>();
@@ -81,5 +83,17 @@ public class NavigatorTest {
 
         assertThat(outContent.toString(), containsString("The Lord of the Rings"));
         assertThat(outContent.toString(), containsString("The Hobbit"));
+    }
+
+    @Test
+    public void shouldPrintAnUnsuccessfulMessageWhenCheckoutInputIsInvalid() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        navigator.registerComponent(library);
+
+        navigator.checkoutBookById("abc");
+
+        assertThat(outContent.toString(), containsString(INVALID_CHECKOUT_MESSAGE));
     }
 }
