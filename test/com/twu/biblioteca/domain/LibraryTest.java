@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -57,5 +59,29 @@ public class LibraryTest {
         library.list();
 
         assertThat(outContent.toString(), containsString(String.valueOf(1954)));
+    }
+
+    @Test
+    public void shouldCheckoutABook() {
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        library.checkoutBookById(key);
+
+        assertThat(library.getBooks().get(key).isCheckedOut(), is(true));
+    }
+
+    @Test
+    public void shouldNotListACheckedOutBook() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        library.checkoutBookById(key);
+        library.list();
+
+        assertThat(outContent.toString(), not(containsString(key.toString())));
     }
 }
