@@ -18,6 +18,7 @@ public class LibraryTest {
     private ArrayList<Book> bookList = new ArrayList<Book>();
 
     private static final String SUCCESS_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
+    private static final String UN_SUCCESS_CHECKOUT_MESSAGE = "Sorry, that book is not available.";
 
     @Before
     public void setUp() {
@@ -98,5 +99,15 @@ public class LibraryTest {
         library.checkoutBookById(key);
 
         assertThat(outContent.toString(), containsString(SUCCESS_CHECKOUT_MESSAGE));
+    }
+
+    @Test
+    public void shouldPrintAUnSuccessfulMessageWhenCheckoutNonExistentBook() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        library.checkoutBookById(UUID.randomUUID());
+
+        assertThat(outContent.toString(), containsString(UN_SUCCESS_CHECKOUT_MESSAGE));
     }
 }
