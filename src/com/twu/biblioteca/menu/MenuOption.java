@@ -1,4 +1,4 @@
-package com.twu.biblioteca.view;
+package com.twu.biblioteca.menu;
 
 public enum MenuOption {
     LIST_BOOKS(MenuConstants.LIST_BOOKS_KEY,"List of books"),

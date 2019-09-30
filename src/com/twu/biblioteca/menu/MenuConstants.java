@@ -1,4 +1,4 @@
-package com.twu.biblioteca.view;
+package com.twu.biblioteca.menu;
 
 public class MenuConstants {
     public static final int LIST_BOOKS_KEY = 1;
