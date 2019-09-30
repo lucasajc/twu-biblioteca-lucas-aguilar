@@ -1,8 +1,11 @@
 package com.twu.biblioteca.view;
 
+import com.twu.biblioteca.mediator.Component;
+import com.twu.biblioteca.mediator.Mediator;
+
 import java.util.ArrayList;
 
-public class Menu {
+public class Menu implements Component {
     private ArrayList<MenuOption> options;
     private int selectedOption;
     private boolean isSelectedOptionValid;
@@ -11,6 +14,11 @@ public class Menu {
         this.options = options;
         this.selectedOption = 0;
         this.isSelectedOptionValid = false;
+    }
+
+    @Override
+    public String getName() {
+        return "Menu";
     }
 
     public void show() {

@@ -1,11 +1,12 @@
 package com.twu.biblioteca.domain;
 
+import com.twu.biblioteca.mediator.Component;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Library {
-
+public class Library implements Component {
     private HashMap<UUID, Book> books;
     private static final String LIST_FORMAT = "%-25s%25s%25s%25s%n";
     private static final String[] LIST_HEADER = new String[] { "Id", "Author", "Title", "Year published" };
@@ -15,6 +16,11 @@ public class Library {
         for (Book book : bookList) {
             this.books.put(book.getId(), book);
         }
+    }
+
+    @Override
+    public String getName() {
+        return "Library";
     }
 
     public void list() {

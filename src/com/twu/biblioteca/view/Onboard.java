@@ -1,6 +1,9 @@
 package com.twu.biblioteca.view;
 
-public class Onboard {
+import com.twu.biblioteca.mediator.Component;
+import com.twu.biblioteca.mediator.Mediator;
+
+public class Onboard implements Component {
     private String welcomeMessage;
 
     public Onboard() {
@@ -15,11 +18,8 @@ public class Onboard {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.");
     }
 
-    public String getWelcomeMessage() {
-        return welcomeMessage;
-    }
-
-    public void setWelcomeMessage(String welcomeMessage) {
-        this.welcomeMessage = welcomeMessage;
+    @Override
+    public String getName() {
+        return "Onboard";
     }
 }
