@@ -10,6 +10,7 @@ public class Library implements Component {
     private static final String LIST_FORMAT = "%-25s%25s%25s%25s%n";
     private static final String[] LIST_HEADER = new String[] { "Id", "Author", "Title", "Year published" };
     private static final String SUCCESS_CHECKOUT_MESSAGE = "\nThank you! Enjoy the book.";
+    private static final String UN_SUCCESS_CHECKOUT_MESSAGE = "Sorry, that book is not available.";
 
     public Library(ArrayList<Book> bookList) {
         this.books = new HashMap<UUID, Book>();
@@ -37,9 +38,13 @@ public class Library implements Component {
     }
 
     public void checkoutBookById(UUID id) {
-        if(!books.get(id).isCheckedOut()) {
-            books.get(id).setCheckedOut(true);
-            System.out.println(SUCCESS_CHECKOUT_MESSAGE);
+        try {
+            if(!books.get(id).isCheckedOut()) {
+                books.get(id).setCheckedOut(true);
+                System.out.println(SUCCESS_CHECKOUT_MESSAGE);
+            }
+        } catch (NullPointerException e) {
+            System.out.println(UN_SUCCESS_CHECKOUT_MESSAGE);
         }
     }
 
