@@ -19,6 +19,7 @@ public class LibraryTest {
 
     private static final String SUCCESS_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
     private static final String UN_SUCCESS_CHECKOUT_MESSAGE = "Sorry, that book is not available.";
+    private static final String SUCCESS_RETURN_MESSAGE = "Thank you for returning the book.";
 
     @Before
     public void setUp() {
@@ -120,5 +121,19 @@ public class LibraryTest {
         library.returnBookById(key);
 
         assertThat(library.getBooks().get(key).isCheckedOut(), is(false));
+    }
+
+    @Test
+    public void shouldPrintASuccessMessageOnReturnABook() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        library.checkoutBookById(key);
+        library.returnBookById(key);
+
+        assertThat(outContent.toString(), containsString(SUCCESS_RETURN_MESSAGE));
     }
 }
