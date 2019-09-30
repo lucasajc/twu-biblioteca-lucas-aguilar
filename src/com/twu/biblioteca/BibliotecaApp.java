@@ -28,6 +28,7 @@ public class BibliotecaApp {
         ArrayList<MenuOption> options = new ArrayList<MenuOption>();
         options.add(MenuOption.LIST_BOOKS);
         options.add(MenuOption.CHECKOUT_BOOK);
+        options.add(MenuOption.RETURN_BOOK);
         options.add(MenuOption.EXIT_APPLICATION);
         Menu menu = new Menu(options);
 
