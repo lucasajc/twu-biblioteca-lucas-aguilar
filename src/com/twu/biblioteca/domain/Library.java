@@ -9,6 +9,7 @@ public class Library implements Component {
     private HashMap<UUID, Book> books;
     private static final String LIST_FORMAT = "%-25s%25s%25s%25s%n";
     private static final String[] LIST_HEADER = new String[] { "Id", "Author", "Title", "Year published" };
+    private static final String SUCCESS_CHECKOUT_MESSAGE = "\nThank you! Enjoy the book.";
 
     public Library(ArrayList<Book> bookList) {
         this.books = new HashMap<UUID, Book>();
@@ -38,6 +39,7 @@ public class Library implements Component {
     public void checkoutBookById(UUID id) {
         if(!books.get(id).isCheckedOut()) {
             books.get(id).setCheckedOut(true);
+            System.out.println(SUCCESS_CHECKOUT_MESSAGE);
         }
     }
 
