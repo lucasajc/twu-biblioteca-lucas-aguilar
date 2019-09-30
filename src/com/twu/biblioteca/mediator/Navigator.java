@@ -16,6 +16,7 @@ public class Navigator implements Mediator {
     private static final String LIBRARY = "Library";
     private static final String MENU = "Menu";
     private static final String ONBOARD = "Onboard";
+    private static final String INVALID_CHECKOUT_MESSAGE = "Please select a valid ID!";
 
     @Override
     public void registerComponent(Component component) {
@@ -44,7 +45,11 @@ public class Navigator implements Mediator {
 
     @Override
     public void checkoutBookById(String userInput) {
-        library.checkoutBookById(UUID.fromString(userInput));
+        try {
+            library.checkoutBookById(UUID.fromString(userInput));
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n" + INVALID_CHECKOUT_MESSAGE);
+        }
     }
 
     @Override
