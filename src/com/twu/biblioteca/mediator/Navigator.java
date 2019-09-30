@@ -6,6 +6,7 @@ import com.twu.biblioteca.view.MenuConstants;
 import com.twu.biblioteca.view.Onboard;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Navigator implements Mediator {
     private Library library;
@@ -42,10 +43,18 @@ public class Navigator implements Mediator {
     }
 
     @Override
+    public void checkoutBookById(String userInput) {
+        library.checkoutBookById(UUID.fromString(userInput));
+    }
+
+    @Override
     public void processUserInput() {
         switch(menu.getSelectedOption()) {
             case MenuConstants.LIST_BOOKS_KEY:
                 listBooks();
+                break;
+            case MenuConstants.CHECKOUT_BOOK_KEY:
+                startBookCheckout();
                 break;
             case MenuConstants.EXIT_APPLICATION_KEY:
                 exitApplication();
@@ -55,6 +64,16 @@ public class Navigator implements Mediator {
     @Override
     public void listBooks() {
         library.list();
+    }
+
+    @Override
+    public void startBookCheckout() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("> Insert a book ID to checkout it: ");
+        String userInput = scanner.nextLine();
+
+        checkoutBookById(userInput);
     }
 
     @Override
