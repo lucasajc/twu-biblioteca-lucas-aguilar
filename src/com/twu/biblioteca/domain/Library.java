@@ -43,6 +43,12 @@ public class Library {
         }
     }
 
+    public void returnBookById(UUID id) {
+        if(books.get(id).isCheckedOut()) {
+            books.get(id).setCheckedOut(false);
+        }
+    }
+
     public ArrayList<Book> getAvailableBooks() {
         return (ArrayList<Book>) books.values().stream()
                 .filter(book -> !book.isCheckedOut())
