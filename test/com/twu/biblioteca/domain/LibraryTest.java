@@ -110,4 +110,15 @@ public class LibraryTest {
 
         assertThat(outContent.toString(), containsString(UN_SUCCESS_CHECKOUT_MESSAGE));
     }
+
+    @Test
+    public void shouldReturnABook() {
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        library.checkoutBookById(key);
+        library.returnBookById(key);
+
+        assertThat(library.getBooks().get(key).isCheckedOut(), is(false));
+    }
 }
