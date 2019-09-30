@@ -17,6 +17,8 @@ public class LibraryTest {
     private Library library;
     private ArrayList<Book> bookList = new ArrayList<Book>();
 
+    private static final String SUCCESS_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
+
     @Before
     public void setUp() {
         bookList = new ArrayList<Book>();
@@ -83,5 +85,18 @@ public class LibraryTest {
         library.list();
 
         assertThat(outContent.toString(), not(containsString(key.toString())));
+    }
+
+    @Test
+    public void shouldPrintASuccessMessageOnCheckoutABook() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        library.checkoutBookById(key);
+
+        assertThat(outContent.toString(), containsString(SUCCESS_CHECKOUT_MESSAGE));
     }
 }
