@@ -74,6 +74,10 @@ public class BibliotecaApp {
         }
     }
 
+    public static void returnBookById(String userInput) {
+        library.returnBookById(UUID.fromString(userInput));
+    }
+
     public static void processUserInput() {
         switch(menu.getSelectedOption()) {
             case MenuConstants.LIST_BOOKS_KEY:
@@ -81,6 +85,9 @@ public class BibliotecaApp {
                 break;
             case MenuConstants.CHECKOUT_BOOK_KEY:
                 startBookCheckout();
+                break;
+            case MenuConstants.RETURN_BOOK_KEY:
+                startBookReturn();
                 break;
             case MenuConstants.EXIT_APPLICATION_KEY:
                 exitApplication();
@@ -98,6 +105,15 @@ public class BibliotecaApp {
         String userInput = scanner.nextLine();
 
         checkoutBookById(userInput);
+    }
+
+    public static void startBookReturn() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("> Insert a book ID to return it: ");
+        String userInput = scanner.nextLine();
+
+        returnBookById(userInput);
     }
 
     public static void exitApplication() {
