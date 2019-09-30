@@ -11,6 +11,7 @@ public class Library {
     private static final String[] LIST_HEADER = new String[] { "Id", "Author", "Title", "Year published" };
     private static final String SUCCESS_CHECKOUT_MESSAGE = "\nThank you! Enjoy the book.";
     private static final String UN_SUCCESS_CHECKOUT_MESSAGE = "Sorry, that book is not available.";
+    private static final String SUCCESS_RETURN_MESSAGE = "Thank you for returning the book.";
 
     public Library(ArrayList<Book> bookList) {
         this.books = new HashMap<UUID, Book>();
@@ -46,6 +47,7 @@ public class Library {
     public void returnBookById(UUID id) {
         if(books.get(id).isCheckedOut()) {
             books.get(id).setCheckedOut(false);
+            System.out.println(SUCCESS_RETURN_MESSAGE);
         }
     }
 
