@@ -79,4 +79,14 @@ public class BibliotecaAppTest {
 
         assertThat(outContent.toString(), containsString(INVALID_CHECKOUT_MESSAGE));
     }
+
+    @Test
+    public void shouldPrintAnUnsuccessfulMessageWhenReturnInputIsInvalid() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        BibliotecaApp.returnBookById("abc");
+
+        assertThat(outContent.toString(), containsString(INVALID_CHECKOUT_MESSAGE));
+    }
 }
