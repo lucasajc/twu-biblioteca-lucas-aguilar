@@ -75,7 +75,11 @@ public class BibliotecaApp {
     }
 
     public static void returnBookById(String userInput) {
-        library.returnBookById(UUID.fromString(userInput));
+        try {
+            library.returnBookById(UUID.fromString(userInput));
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n" + INVALID_CHECKOUT_MESSAGE);
+        }
     }
 
     public static void processUserInput() {
