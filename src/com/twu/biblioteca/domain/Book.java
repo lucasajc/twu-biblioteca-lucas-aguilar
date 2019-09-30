@@ -7,6 +7,7 @@ public class Book {
     private String author;
     private String title;
     private int year;
+    private boolean checkedOut;
 
     public Book(String author, String title, int year) {
         this.id = UUID.randomUUID();
@@ -29,5 +30,13 @@ public class Book {
 
     public int getYear() {
         return year;
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
+
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
     }
 }
