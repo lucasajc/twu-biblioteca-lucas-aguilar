@@ -2,9 +2,8 @@ package com.twu.biblioteca.domain;
 
 import com.twu.biblioteca.mediator.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Library implements Component {
     private HashMap<UUID, Book> books;
@@ -27,13 +26,25 @@ public class Library implements Component {
         System.out.println("\nList of books:\n");
         System.out.format(LIST_FORMAT, LIST_HEADER);
 
-        for(Book book : this.books.values()) {
+        for(Book book : getAvailableBooks()) {
             System.out.format(LIST_FORMAT,
                     book.getId(),
                     book.getAuthor(),
                     book.getTitle(),
                     book.getYear());
         }
+    }
+
+    public void checkoutBookById(UUID id) {
+        if(!books.get(id).isCheckedOut()) {
+            books.get(id).setCheckedOut(true);
+        }
+    }
+
+    public ArrayList<Book> getAvailableBooks() {
+        return (ArrayList<Book>) books.values().stream()
+                .filter(book -> !book.isCheckedOut())
+                .collect(Collectors.toList());
     }
 
     public HashMap<UUID, Book> getBooks() {
