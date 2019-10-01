@@ -18,20 +18,25 @@ public class MenuTest {
 
     @Before
     public void setUp() {
-        MenuOption listOfBooksOption = MenuOption.LIST_BOOKS;
         ArrayList<MenuOption> options = new ArrayList<MenuOption>();
-        options.add(listOfBooksOption);
+        options.add(MenuOption.LIST_BOOKS);
+        options.add(MenuOption.CHECKOUT_BOOK);
+        options.add(MenuOption.RETURN_BOOK);
+        options.add(MenuOption.EXIT_APPLICATION);
         menu = new Menu(options);
     }
 
     @Test
-    public void shouldShowAMenuWithListOfBooksOption() {
+    public void shouldShowAMenuWithAppropriateOptions() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         menu.show();
 
         assertThat(outContent.toString(), containsString(MenuOption.LIST_BOOKS.getDescription()));
+        assertThat(outContent.toString(), containsString(MenuOption.CHECKOUT_BOOK.getDescription()));
+        assertThat(outContent.toString(), containsString(MenuOption.RETURN_BOOK.getDescription()));
+        assertThat(outContent.toString(), containsString(MenuOption.EXIT_APPLICATION.getDescription()));
     }
 
     @Test
