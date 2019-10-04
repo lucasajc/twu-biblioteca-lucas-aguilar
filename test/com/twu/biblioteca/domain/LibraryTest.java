@@ -40,7 +40,7 @@ public class LibraryTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        library.list();
+        library.listBooks();
 
         assertThat(outContent.toString(), containsString("The Lord of the Rings"));
         assertThat(outContent.toString(), containsString("The Hobbit"));
@@ -51,7 +51,7 @@ public class LibraryTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        library.list();
+        library.listBooks();
 
         assertThat(outContent.toString(), containsString("J. R. R. Tolkien"));
     }
@@ -61,7 +61,7 @@ public class LibraryTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        library.list();
+        library.listBooks();
 
         assertThat(outContent.toString(), containsString(String.valueOf(1954)));
     }
@@ -85,7 +85,7 @@ public class LibraryTest {
         UUID key = entry.getKey();
 
         library.checkoutBookById(key);
-        library.list();
+        library.listBooks();
 
         assertThat(outContent.toString(), not(containsString(key.toString())));
     }
