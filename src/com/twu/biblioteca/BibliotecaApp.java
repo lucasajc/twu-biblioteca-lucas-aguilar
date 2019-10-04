@@ -58,15 +58,54 @@ public class BibliotecaApp {
         return library;
     }
 
-    public static void printWelcomeMessage() {
+    private static void listBooks() {
+        library.listBooks();
+    }
+
+    private static void startBookCheckout() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("> Insert a book ID to checkout it: ");
+        String userInput = scanner.nextLine();
+
+        checkoutBookById(userInput);
+    }
+
+    private static void startBookReturn() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("> Insert a book ID to return it: ");
+        String userInput = scanner.nextLine();
+
+        returnBookById(userInput);
+    }
+
+    private static void exitApplication() {
+        System.exit(0);
+    }
+
+    private static void run() {
+        menu.show();
+        do {
+            menu.printMenuSelectUserInput();
+            Scanner scanner = new Scanner(System.in);
+            String userInput = scanner.nextLine();
+            selectMenuOption(userInput);
+        } while(!menu.isSelectedOptionValid());
+
+        processUserInput();
+        run();
+    }
+
+    static void printWelcomeMessage() {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.");
     }
 
-    public static void selectMenuOption(String userInput) {
+    static void selectMenuOption(String userInput) {
         menu.selectMenuOption(userInput);
     }
 
-    public static void checkoutBookById(String userInput) {
+    static void checkoutBookById(String userInput) {
         try {
             library.checkoutBookById(UUID.fromString(userInput));
         } catch (IllegalArgumentException e) {
@@ -74,7 +113,7 @@ public class BibliotecaApp {
         }
     }
 
-    public static void returnBookById(String userInput) {
+    static void returnBookById(String userInput) {
         try {
             library.returnBookById(UUID.fromString(userInput));
         } catch (IllegalArgumentException e) {
@@ -82,7 +121,7 @@ public class BibliotecaApp {
         }
     }
 
-    public static void processUserInput() {
+    static void processUserInput() {
         switch(menu.getSelectedOption()) {
             case MenuConstants.LIST_BOOKS_KEY:
                 listBooks();
@@ -98,50 +137,11 @@ public class BibliotecaApp {
         }
     }
 
-    public static void listBooks() {
-        library.listBooks();
-    }
-
-    public static void startBookCheckout() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("> Insert a book ID to checkout it: ");
-        String userInput = scanner.nextLine();
-
-        checkoutBookById(userInput);
-    }
-
-    public static void startBookReturn() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("> Insert a book ID to return it: ");
-        String userInput = scanner.nextLine();
-
-        returnBookById(userInput);
-    }
-
-    public static void exitApplication() {
-        System.exit(0);
-    }
-
-    public static void run() {
-        menu.show();
-        do {
-            menu.printMenuSelectUserInput();
-            Scanner scanner = new Scanner(System.in);
-            String userInput = scanner.nextLine();
-            selectMenuOption(userInput);
-        } while(!menu.isSelectedOptionValid());
-
-        processUserInput();
-        run();
-    }
-
-    public static void setLibrary(Library library) {
+    static void setLibrary(Library library) {
         BibliotecaApp.library = library;
     }
 
-    public static void setMenu(Menu menu) {
+    static void setMenu(Menu menu) {
         BibliotecaApp.menu = menu;
     }
 }
