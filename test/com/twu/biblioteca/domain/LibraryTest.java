@@ -74,6 +74,19 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldChecksIfABookExistsById() {
+        HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
+        UUID key = entry.getKey();
+
+        assertThat(library.isBookExists(key), is(true));
+    }
+
+    @Test
+    public void shouldChecksIfABookDoesNotExistsById() {
+        assertThat(library.isBookExists(UUID.randomUUID()), is(false));
+    }
+
+    @Test
     public void shouldCheckoutABook() {
         HashMap.Entry<UUID, Book> entry = library.getBooks().entrySet().iterator().next();
         UUID key = entry.getKey();

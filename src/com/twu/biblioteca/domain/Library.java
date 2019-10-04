@@ -59,27 +59,26 @@ public class Library {
         }
     }
 
+    boolean isBookExists(UUID id) {
+        return books.get(id) != null;
+    }
+
     public void checkoutBookById(UUID id) {
-        try {
-            if(!books.get(id).isCheckedOut()) {
-                books.get(id).setCheckedOut(true);
-                System.out.println(SUCCESS_CHECKOUT_MESSAGE);
-            }
-        } catch (NullPointerException e) {
+        if(!isBookExists(id) || books.get(id).isCheckedOut()) {
             System.out.println(UN_SUCCESS_CHECKOUT_MESSAGE);
+            return;
         }
+        books.get(id).setCheckedOut(true);
+        System.out.println(SUCCESS_CHECKOUT_MESSAGE);
     }
 
     public void returnBookById(UUID id) {
-        try {
-            if(books.get(id).isCheckedOut()) {
-                books.get(id).setCheckedOut(false);
-                System.out.println(SUCCESS_RETURN_MESSAGE);
-            }
-        } catch (NullPointerException e) {
+        if(!isBookExists(id) || !books.get(id).isCheckedOut()) {
             System.out.println(UN_SUCCESS_RETURN_MESSAGE);
+            return;
         }
-
+        books.get(id).setCheckedOut(false);
+        System.out.println(SUCCESS_RETURN_MESSAGE);
     }
 
     public ArrayList<Book> getAvailableBooks() {
