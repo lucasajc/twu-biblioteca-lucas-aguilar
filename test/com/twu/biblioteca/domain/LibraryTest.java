@@ -36,6 +36,13 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldCreateADefaultCollectionOfBooks() {
+        Library defaultLibrary = new Library();
+
+        assertThat(defaultLibrary.getBooks().size(), is(13));
+    }
+
+    @Test
     public void shouldListEntireBookCollection() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));

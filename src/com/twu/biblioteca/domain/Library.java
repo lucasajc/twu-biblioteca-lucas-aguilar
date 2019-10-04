@@ -15,7 +15,32 @@ public class Library {
     private static final String UN_SUCCESS_RETURN_MESSAGE = "This is not a valid book to return.";
 
     public Library(ArrayList<Book> bookList) {
+        fillBookCollection(bookList);
+    }
+
+    public Library() {
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        bookList = new ArrayList<Book>();
+        bookList.add(new Book("J. R. R. Tolkien", "The Lord of the Rings", 1954));
+        bookList.add(new Book("J. R. R. Tolkien", "The Hobbit", 1937));
+        bookList.add(new Book("J. R. R. Tolkien", "The Silmarillion", 1977));
+        bookList.add(new Book("J. R. R. Tolkien", "The Fall of Gondolin", 2018));
+        bookList.add(new Book("Conn Iggulden", "Wolf of the Plains", 2007));
+        bookList.add(new Book("Conn Iggulden", "Lords of the Bow", 2008));
+        bookList.add(new Book("Conn Iggulden", "Bones of the Hills", 2008));
+        bookList.add(new Book("Conn Iggulden", "Conqueror", 2011));
+        bookList.add(new Book("George R. R. Martin", "A Game of Thrones", 1996));
+        bookList.add(new Book("George R. R. Martin", "A Clash of Kings", 1999));
+        bookList.add(new Book("George R. R. Martin", "A Storm of Swords", 2000));
+        bookList.add(new Book("George R. R. Martin", "A Feast for Crows", 2005));
+        bookList.add(new Book("George R. R. Martin", "A Dance with Dragons", 2011));
+
+        fillBookCollection(bookList);
+    }
+
+    private void fillBookCollection(ArrayList<Book> bookList) {
         this.books = new HashMap<UUID, Book>();
+
         for (Book book : bookList) {
             this.books.put(book.getId(), book);
         }

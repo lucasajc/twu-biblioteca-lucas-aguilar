@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.domain.Book;
 import com.twu.biblioteca.domain.Library;
 import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.menu.MenuConstants;
@@ -18,7 +17,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         menu = initializeMenu();
-        library = initializeBookCollection();
+        library = new Library();
 
         printWelcomeMessage();
         run();
@@ -33,29 +32,6 @@ public class BibliotecaApp {
         Menu menu = new Menu(options);
 
         return menu;
-    }
-
-    private static Library initializeBookCollection() {
-        Library library;
-        ArrayList<Book> bookList = new ArrayList<Book>();
-        bookList = new ArrayList<Book>();
-        bookList.add(new Book("J. R. R. Tolkien", "The Lord of the Rings", 1954));
-        bookList.add(new Book("J. R. R. Tolkien", "The Hobbit", 1937));
-        bookList.add(new Book("J. R. R. Tolkien", "The Silmarillion", 1977));
-        bookList.add(new Book("J. R. R. Tolkien", "The Fall of Gondolin", 2018));
-        bookList.add(new Book("Conn Iggulden", "Wolf of the Plains", 2007));
-        bookList.add(new Book("Conn Iggulden", "Lords of the Bow", 2008));
-        bookList.add(new Book("Conn Iggulden", "Bones of the Hills", 2008));
-        bookList.add(new Book("Conn Iggulden", "Conqueror", 2011));
-        bookList.add(new Book("George R. R. Martin", "A Game of Thrones", 1996));
-        bookList.add(new Book("George R. R. Martin", "A Clash of Kings", 1999));
-        bookList.add(new Book("George R. R. Martin", "A Storm of Swords", 2000));
-        bookList.add(new Book("George R. R. Martin", "A Feast for Crows", 2005));
-        bookList.add(new Book("George R. R. Martin", "A Dance with Dragons", 2011));
-
-        library = new Library(bookList);
-
-        return library;
     }
 
     private static void listBooks() {
