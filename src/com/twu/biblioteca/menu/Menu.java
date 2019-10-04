@@ -40,7 +40,7 @@ public class Menu {
         }
     }
 
-    public void rejectInvalidOption() {
+    private void rejectInvalidOption() {
         System.out.println("\nPlease select a valid option!\n");
         isSelectedOptionValid = false;
     }
