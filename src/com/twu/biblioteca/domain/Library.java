@@ -21,7 +21,7 @@ public class Library {
         }
     }
 
-    public void list() {
+    public void listBooks() {
         System.out.println("\nList of books:\n");
         System.out.format(LIST_FORMAT, LIST_HEADER);
 

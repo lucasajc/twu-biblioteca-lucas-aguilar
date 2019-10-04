@@ -99,7 +99,7 @@ public class BibliotecaApp {
     }
 
     public static void listBooks() {
-        library.list();
+        library.listBooks();
     }
 
     public static void startBookCheckout() {
